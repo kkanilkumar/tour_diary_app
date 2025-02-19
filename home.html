@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Diary - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+</head>
+<body class="bg-light">
+    <div class="container bg-white p-4 rounded shadow" style="max-width: 400px;" id="login-container">
+        <div id="login-page">
+            <h2 class="text-center text-primary mb-4">Login</h2>
+            <form id="login-form">
+                <div class="mb-3">
+                    <input type="email" class="form-control" id="login-email" placeholder="Email" required>
+                </div>
+                <div class="mb-3">
+                    <input type="password" class="form-control" id="login-password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <p class="text-center mt-3">Don't have an account? <a href="#" id="go-to-signup" class="text-decoration-none">Sign Up</a></p>
+            </form>
+        </div>
+
+        <div id="signup-page" style="display: none;">
+            <h2 class="text-center text-primary mb-4">Sign Up</h2>
+            <form id="signup-form">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="signup-name" placeholder="Name" required>
+                </div>
+                <div class="mb-3">
+                    <input type="email" class="form-control" id="signup-email" placeholder="Email" required>
+                </div>
+                <div class="mb-3">
+                    <input type="password" class="form-control" id="signup-password" placeholder="Password" required>
+                </div>
+                <div class="mb-3">
+                    <input type="password" class="form-control" id="signup-confirm-password" placeholder="Confirm Password" required>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="signup-designation" placeholder="Designation" required>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="signup-scale-of-pay" placeholder="Scale of Pay" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+                <p class="text-center mt-3">Already have an account? <a href="#" id="go-to-login" class="text-decoration-none">Login</a></p>
+            </form>
+        </div>
+    </div>
+    
+    <div id="profile-page" style="display: none; padding: 20px;">
+        <div class="row">
+            <div class="col-md-2">
+                <button id="profileButton" class="btn btn-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProfile" aria-expanded="false" aria-controls="collapseProfile">
+                    Profile
+                </button>
+                <div class="collapse" id="collapseProfile">
+                    <div class="card card-body" style="max-height: 300px; overflow-y: auto;">
+                        <p><strong>Name:</strong> <span id="profile-name"></span></p>
+                        <p><strong>Designation:</strong> <span id="profile-designation"></span></p>
+                        <p><strong>Scale of Pay:</strong> <span id="profile-scale-of-pay"></span></p>
+                        <button id="edit-profile-button" class="btn btn-secondary mt-2">Edit Profile</button>
+                        <button id="logout-button" class="btn btn-danger mt-3">Logout</button>
+    
+                        <form id="edit-profile-form" style="display: none; margin-top: 15px;">
+                            <div class="mb-2">
+                                <label for="edit-profile-name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="edit-profile-name" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="edit-profile-designation" class="form-label">Designation</label>
+                                <input type="text" class="form-control" id="edit-profile-designation" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="edit-profile-scale" class="form-label">Scale of Pay</label>
+                                <input type="text" class="form-control" id="edit-profile-scale" required>
+                            </div>
+                            <button type="submit" class="btn btn-success">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-md-4">
+                <h3 class="text-primary">Add Travel Log</h3>
+                <form id="travel-log-form">
+                    <div class="mb-3">
+                        <label for="travel-date" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="travel-date" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="entry-type" class="form-label">Entry Type</label>
+                        <select class="form-control" id="entry-type" required>
+                            <option value="Normal Duty">Normal Duty</option>
+                            <option value="Public Holiday">Public Holiday</option>
+                            <option value="Casual Leave">Casual Leave</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="place-from" class="form-label">Place From</label>
+                        <input type="text" class="form-control" id="place-from">
+                    </div>
+                    <div class="mb-3">
+                        <label for="place-to" class="form-label">Place To</label>
+                        <input type="text" class="form-control" id="place-to">
+                    </div>
+                    <div class="mb-3">
+                        <label for="time-in" class="form-label">Time In</label>
+                        <input type="time" class="form-control" id="time-in">
+                    </div>
+                    <div class="mb-3">
+                        <label for="time-out" class="form-label">Time Out</label>
+                        <input type="time" class="form-control" id="time-out">
+                    </div>
+                    <div class="mb-3">
+                        <label for="distance-or-mode" class="form-label">Distance/Mode of Travel</label>
+                        <input type="text" class="form-control" id="distance-or-mode">
+                    </div>
+                    <div class="mb-3">
+                        <label for="purpose" class="form-label">Purpose</label>
+                        <input type="text" class="form-control" id="purpose">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Add Log</button>
+                </form>
+            </div>
+    
+            <div class="col-md-5">
+                <h3 class="text-primary">Travel Logs</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Place From</th>
+                            <th>Place To</th>
+                            <th>Time In</th>
+                            <th>Time Out</th>
+                            <th>Distance/Mode</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody id="travel-logs-list">
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-center mt-3">
+                    <button id="download-excel-button" class="btn btn-success">Download Excel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+</body>
+</html>
