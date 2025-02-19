@@ -3,33 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tour Diary App - Home</title>
+    <title>Tour Diary - Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .homepage-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+        .homepage-container h1 {
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        .homepage-container p {
+            color: #34495e;
+            font-size: 1.1rem;
+        }
+        .nav-tabs .nav-link {
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        .nav-tabs .nav-link.active {
+            background: #2c3e50;
+            color: white;
+        }
+    </style>
 </head>
-<body class="bg-light">
-    <div class="container text-center mt-5">
-        <h1 class="text-primary mb-3">Welcome to Tour Diary App</h1>
-        <p class="lead mb-4">An easy and efficient solution to manage your daily travel logs and work-related movements. Stay organized and simplify your reporting with our user-friendly app.</p>
-        
-        <div class="d-flex justify-content-center gap-3">
-            <a href="home.html" class="btn btn-primary btn-lg">Login</a>
-            <a href="home.html" class="btn btn-success btn-lg">Sign Up</a>
-        </div>
+<body>
+    <div class="homepage-container">
+        <h1 class="text-center mb-4">Welcome to Tour Diary</h1>
+        <p class="text-center mb-4">
+            Tour Diary is your ultimate companion for managing travel logs. Whether you're on a business trip or a vacation,
+            Tour Diary helps you keep track of your travel details, including dates, places, times, and purposes. Sign up today
+            to start organizing your travel logs effortlessly!
+        </p>
 
-        <div class="mt-5">
-            <h3>About the Tour Diary App</h3>
-            <p>The Tour Diary App is designed to help professionals, government employees, and field officers maintain accurate records of their daily travel and work-related duties. Users can log their travel, track non-working days like public holidays and casual leaves, and download their records in Excel format.</p>
+        <!-- Login/Signup Tabs -->
+        <ul class="nav nav-tabs nav-justified mb-4" id="authTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Login</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup" type="button" role="tab" aria-controls="signup" aria-selected="false">Sign Up</button>
+            </li>
+        </ul>
 
-            <ul class="list-group list-group-flush text-start d-inline-block text-center mt-3">
-                <li class="list-group-item">Secure User Authentication</li>
-                <li class="list-group-item">Easy Travel Log Entry</li>
-                <li class="list-group-item">Track Public Holidays & Casual Leaves</li>
-                <li class="list-group-item">Profile Management</li>
-                <li class="list-group-item">Excel Export for Reporting</li>
-            </ul>
+        <!-- Tab Content -->
+        <div class="tab-content" id="authTabsContent">
+            <!-- Login Tab -->
+            <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                <form id="login-form">
+                    <div class="mb-3">
+                        <label for="login-email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="login-email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="login-password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="login-password" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </form>
+            </div>
+
+            <!-- Signup Tab -->
+            <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+                <form id="signup-form">
+                    <div class="mb-3">
+                        <label for="signup-name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="signup-name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="signup-email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="signup-email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="signup-password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="signup-password" placeholder="Create a password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="signup-confirm-password" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="signup-confirm-password" placeholder="Confirm your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Sign Up</button>
+                </form>
+            </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
 </body>
 </html>
