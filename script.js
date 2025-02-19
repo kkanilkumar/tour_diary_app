@@ -258,3 +258,39 @@ document.addEventListener('DOMContentLoaded', async function () {
         XLSX.writeFile(workbook, filename);
     }
 });
+// Login Form Submission
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+        alert('Login failed: ' + error.message);
+    } else {
+        alert('Login successful!');
+        window.location.href = 'profile.html'; // Redirect to profile page
+    }
+});
+
+// Signup Form Submission
+document.getElementById('signup-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('signup-name').value;
+    const email = document.getElementById('signup-email').value;
+    const password = document.getElementById('signup-password').value;
+    const confirmPassword = document.getElementById('signup-confirm-password').value;
+
+    if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return;
+    }
+
+    const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { name } } });
+    if (error) {
+        alert('Signup failed: ' + error.message);
+    } else {
+        alert('Signup successful! Check your email for verification.');
+        window.location.href = 'login.html'; // Redirect to login page
+    }
+});
